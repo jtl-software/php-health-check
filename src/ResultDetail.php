@@ -24,12 +24,8 @@ class ResultDetail
      */
     public function __construct(string $subject, $value)
     {
-        if (!in_array(gettype($value), ['boolean', 'integer', 'double', 'string'])) {
-            throw new Exception('Data type from value needs to be boolean, double, integer or string');
-        }
-
         $this->subject = $subject;
-        $this->value = $value;
+        $this->setValue($value);
     }
 
     /**
@@ -46,5 +42,19 @@ class ResultDetail
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @var boolean|double|integer|string
+     * @return ResultDetail
+     */
+    public function setValue($value): self
+    {
+        if (!in_array(gettype($value), ['boolean', 'integer', 'double', 'string'])) {
+            throw new Exception('Data type from value needs to be boolean, double, integer or string');
+        }
+
+        $this->value = $value;
+        return $this;
     }
 }
