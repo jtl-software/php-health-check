@@ -31,7 +31,7 @@ abstract class AbstractHealthCheck
     {
         $this
             ->response
-            ->setData($result->toArray())
+            ->setData($result)
             ->setStatusCode($result->hasPassed() ? 200 : 500)
             ->send();
     }

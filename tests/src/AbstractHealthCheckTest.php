@@ -36,7 +36,7 @@ class AbstractHealthCheckTest extends TestCase
         $response
             ->expects($this->once())
             ->method('setData')
-            ->with($result->toArray())
+            ->with($result)
             ->willReturn($response);
 
         $response
