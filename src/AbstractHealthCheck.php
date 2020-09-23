@@ -20,14 +20,14 @@ abstract class AbstractHealthCheck
     }
 
     /**
-     * @return HealthCheckResult
+     * @return Result
      */
-    abstract public function check(): HealthCheckResult;
+    abstract public function check(): Result;
 
     /**
-     * @param HealthCheckResult $result
+     * @param Result $result
      */
-    public function sendResult(HealthCheckResult $result): void
+    public function sendResult(Result $result): void
     {
         $this
             ->response

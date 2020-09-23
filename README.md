@@ -6,22 +6,28 @@ This is a lightweight lib for creating health checks in php.
 <?php
 
 use Jtl\HealthCheck\AbstractHealthCheck;
-use Jtl\HealthCheck\HealthCheckResult;
-use Jtl\HealthCheck\HealthCheckResultMessage;
+use Jtl\HealthCheck\Result;
+use Jtl\HealthCheck\ResultDetail;
+use Jtl\HealthCheck\ResultMessage;
 
-$check = new class extends AbstractHealthCheck {
-    public function check(): HealthCheckResult
+$healthCheck = new class extends AbstractHealthCheck {
+    public function check(): Result
     {
         $passed = true;
 
-        $data = ['app' => true, 'db' => true];
+        $details = [
+            new ResultDetail('app', true),
+            new ResultDetail('db', true),
+        ];
 
-        $message = new HealthCheckResultMessage(HealthCheckResultMessage::STATUS_INFO, 'app', 'Everything is tutti');
+        $messages =  [
+            new ResultMessage('info', 'app', 'Everything is tutti');
+        ];
 
-        return new HealthCheckResult($passed, $data, [$message]);
+        return new Result($passed, $details, $messages);
     }
 };
 
 //Outputs a json response with either http status 200 or 500.
-$check->checkAndSendResult();
+$healthCheck->checkAndSendResult();
 ```

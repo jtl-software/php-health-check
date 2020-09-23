@@ -2,13 +2,8 @@
 
 namespace Jtl\HealthCheck;
 
-class HealthCheckResultMessage
+class ResultMessage
 {
-    public const
-        STATUS_INFO = 'info',
-        STATUS_WARNING = 'warning',
-        STATUS_ERROR = 'error';
-
     /**
      * @var string
      */
@@ -33,9 +28,9 @@ class HealthCheckResultMessage
      */
     public function __construct(string $status, string $subject, string $message)
     {
-        $this->setStatus($status);
-        $this->setSubject($subject);
-        $this->setMessage($message);
+        $this->status = $status;
+        $this->subject = $subject;
+        $this->message = $message;
     }
 
     /**
@@ -53,10 +48,6 @@ class HealthCheckResultMessage
      */
     public function setStatus(string $status): self
     {
-        if (!self::isStatus($status)) {
-            throw new \Exception(sprintf('%s is not a valid status', $status));
-        }
-
         $this->status = $status;
         return $this;
     }
@@ -71,7 +62,7 @@ class HealthCheckResultMessage
 
     /**
      * @param string $subject
-     * @return HealthCheckResultMessage
+     * @return ResultMessage
      */
     public function setSubject(string $subject): self
     {
@@ -89,21 +80,12 @@ class HealthCheckResultMessage
 
     /**
      * @param string $message
-     * @return HealthCheckResultMessage
+     * @return ResultMessage
      */
     public function setMessage(string $message): self
     {
         $this->message = $message;
         return $this;
-    }
-
-    /**
-     * @param string $status
-     * @return boolean
-     */
-    public static function isStatus(string $status): bool
-    {
-        return in_array($status, [self::STATUS_ERROR, self::STATUS_INFO, self::STATUS_WARNING]);
     }
 
     /**

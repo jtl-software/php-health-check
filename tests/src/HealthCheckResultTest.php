@@ -2,21 +2,23 @@
 
 namespace Jtl\HealthCheck\Test;
 
-use Jtl\HealthCheck\HealthCheckResult;
+use Jtl\HealthCheck\Result;
 
 class HealthCheckResultTest extends TestCase
 {
     /**
      * @dataProvider resultDataProvider
      *
-     * @param HealthCheckResult $result
+     * @param Result $result
      */
-    public function testToArray(HealthCheckResult $result)
+    public function testToArray(Result $result)
     {
         $expectedArray = ['passed' => $result->hasPassed()];
 
-        if ($result->hasData()) {
-            $expectedArray['data'] = $result->getData();
+        if ($result->hasDetails()) {
+            foreach ($result->getDetails() as $detail) {
+                $expectedArray['details'][$detail->getSubject()] = $detail->getValue();
+            }
         }
 
         if ($result->hasMessages()) {

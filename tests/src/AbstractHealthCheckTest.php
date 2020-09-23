@@ -3,7 +3,7 @@
 namespace Jtl\HealthCheck\Test;
 
 use Jtl\HealthCheck\AbstractHealthCheck;
-use Jtl\HealthCheck\HealthCheckResult;
+use Jtl\HealthCheck\Result;
 use Symfony\Component\HttpFoundation\JsonResponse;
 
 class AbstractHealthCheckTest extends TestCase
@@ -11,9 +11,9 @@ class AbstractHealthCheckTest extends TestCase
     /**
      * @dataProvider resultDataProvider
      *
-     * @param HealthCheckResult $result
+     * @param Result $result
      */
-    public function testSendData(HealthCheckResult $result)
+    public function testSendData(Result $result)
     {
         $this->expectOutputString(json_encode($result->toArray()));
 
@@ -25,9 +25,9 @@ class AbstractHealthCheckTest extends TestCase
     /**
      * @dataProvider resultDataProvider
      *
-     * @param HealthCheckResult $result
+     * @param Result $result
      */
-    public function testSendHttpStatus(HealthCheckResult $result)
+    public function testSendHttpStatus(Result $result)
     {
         $response = $this->getMockBuilder(JsonResponse::class)
             ->onlyMethods(['setData', 'setStatusCode'])
@@ -55,9 +55,9 @@ class AbstractHealthCheckTest extends TestCase
     /**
      * @dataProvider resultDataProvider
      *
-     * @param HealthCheckResult $result
+     * @param Result $result
      */
-    public function testCheckAndSendResult(HealthCheckResult $result)
+    public function testCheckAndSendResult(Result $result)
     {
         $check = $this->getMockBuilder(AbstractHealthCheck::class)
             ->onlyMethods(['check', 'sendResult'])

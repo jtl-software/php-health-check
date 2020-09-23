@@ -3,21 +3,22 @@
 
 namespace Jtl\HealthCheck\Test;
 
-use Jtl\HealthCheck\HealthCheckResult;
-use Jtl\HealthCheck\HealthCheckResultMessage;
+use Jtl\HealthCheck\Result;
+use Jtl\HealthCheck\ResultDetail;
+use Jtl\HealthCheck\ResultMessage;
 
 abstract class TestCase extends \PHPUnit\Framework\TestCase
 {
     /**
-     * @return HealthCheckResult[]
+     * @return Result[]
      */
     public function resultDataProvider(): array
     {
         return [
-            [new HealthCheckResult(false, ['foo' => 'bar'], [new HealthCheckResultMessage('error', 'foo', 'foobar')])],
-            [new HealthCheckResult(true, ['bool' => false])],
-            [new HealthCheckResult(true, [], [new HealthCheckResultMessage('error', 'foo', 'foobar')])],
-            [new HealthCheckResult(false)],
+            [new Result(false, [new ResultDetail('foo', 'bar')], [new ResultMessage('error', 'foo', 'foobar')])],
+            [new Result(true, [new ResultDetail('bool', false)])],
+            [new Result(true, [], [new ResultMessage('error', 'foo', 'foobar')])],
+            [new Result(false)],
         ];
     }
 }
