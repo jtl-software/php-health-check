@@ -1,4 +1,4 @@
-#Introduction
+# Introduction
 
 This is a lightweight lib for creating health checks in php.
 
