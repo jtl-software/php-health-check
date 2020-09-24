@@ -54,9 +54,11 @@ abstract class AbstractHealthCheck
 
     /**
      * @param JsonResponse $response
+     * @return AbstractHealthCheck
      */
-    public function setResponse(JsonResponse $response): void
+    public function setResponse(JsonResponse $response): self
     {
         $this->response = $response;
+        return $this;
     }
 }
