@@ -21,7 +21,7 @@ $healthCheck = new class extends AbstractHealthCheck {
         ];
 
         $messages =  [
-            new ResultMessage('info', 'app', 'Everything is tutti');
+            new ResultMessage('info', 'app', 'Everything is tutti')
         ];
 
         return new Result($passed, $details, $messages);
