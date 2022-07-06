@@ -59,6 +59,7 @@ class Result implements \JsonSerializable
     /**
      * @return bool[]|mixed|mixed[]
      */
+    #[\ReturnTypeWillChange]
     public function jsonSerialize()
     {
         return $this->toArray();
