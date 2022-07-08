@@ -16,7 +16,7 @@ abstract class AbstractHealthCheck
      */
     public function __construct()
     {
-        $this->response = new JsonResponse();
+        $this->response = new JsonResponse(null, 200, ['Access-Control-Allow-Origin' => '*']);
     }
 
     /**
